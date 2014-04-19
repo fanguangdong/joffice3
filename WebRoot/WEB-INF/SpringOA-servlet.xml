@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:aop="http://www.springframework.org/schema/aop" 
+       xmlns:tx="http://www.springframework.org/schema/tx" 
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+                           http://www.springframework.org/schema/tx 
+                           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                           http://www.springframework.org/schema/aop 
+                           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/util
+    					   http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+       default-autowire="byName">
+	
+	<!-- Annotation Based Setup - With Autowiring -->
+	
+	<context:component-scan base-package="com.ocsoft.oa.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <context:component-scan base-package="com.ocsoft.oa.service">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+    
+    <context:component-scan base-package="com.ocsoft.oa.dao" >
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+    <!--  
+	-->
+	<!-- Controllers -->
+
+	
+	<!-- Business Objects -->
+    
+    
+    <!-- Data Access Objects -->
+
+	
+	<!-- Controller Handlers 
+	<bean id="handlerAdapter" class="com.aon.esolutions.bba.BBAControllerHandlerAdapter" />
+	-->
+	
+	
+	<!-- Exception Handlers -->
+    <!-- <bean id="handlerExceptionResolver" class="com.aon.esolutions.bba.AonServletHandlerException" /> -->
+    
+    
+	<!-- NOTE: Nothing Below This Line Should Change, Implementation is Above 
+ 	<bean id="commonValidationMethods" class="com.valleyoak.common.validation.CommonValidationMethods" factory-method="getInstance"/>
+	-->
+	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" />
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+	<!-- 
+	 -->
+		<property name="interceptors">
+			<list>
+			<!-- 
+				<ref bean="sessionInterceptor"/>
+			 -->
+			 	<!-- TODO
+				<ref bean="loginInterceptor"/>
+				<ref bean="contextInterceptor"/>
+			 	 -->
+			</list>
+		</property>
+	</bean>
+	<!--  TODO
+	<bean id="loginInterceptor" class="com.ocsoft.core.web.interceptor.LoginInterceptor"/>
+	<bean id="contextInterceptor" class="com.ocsoft.core.web.interceptor.ContextInterceptor"/>
+	 -->
+	 
+	<!-- 
+	<bean id="sessionInterceptor" class="org.springframework.orm.hibernate4.support.OpenSessionInViewInterceptor">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	 -->
+	
+	
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<util:list id="beanList">
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</util:list>
+		</property>
+		<!--  TODO
+		<property name="webBindingInitializer">
+			<bean class="com.ocsoft.core.web.spring.BindingInitializer"/>
+		</property>
+		  -->
+	</bean>
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="objectMapper">
+            <bean class="com.ocsoft.core.util.HibernateAwareObjectMapper" />
+        </property>
+		
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	 <!-- Method Name Resolver used by Controllers 
+	<bean id="methodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		<property name="paramName" value="action"/>
+	</bean>
+-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+         <!-- one of the properties available; the maximum file size in bytes -->  
+         <property name="maxUploadSize" value="10000000" /><!-- 10M -->  
+     </bean> 
+	<!-- Resource Bundle Resolver -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames" value="oa,common"/>
+    </bean>
+		
+	<!-- View Resolver freemarker and jsp - How to find the JSP that we are going to for this "view" -->
+    <bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <!-- 
+    	<property name="viewClass" value="com.ocsoft.oa.spring.view.CustomJstlView"></property>
+     -->
+        <property name="suffix" value=".jsp"/>
+        <property name="order" value="2" />
+    </bean> 
+    
+    <!-- ===========================Transaction=============================== 
+    
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">  
+        <property name="sessionFactory" ref="sessionFactory" />  
+    </bean>  
+     -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">  
+        <tx:attributes>  
+         	<tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="get*" propagation="REQUIRED"  read-only="true"/>
+ 			<tx:method name="delete*" propagation="REQUIRED"/>
+ 			<tx:method name="update*" propagation="REQUIRED"/>
+ 			<tx:method name="save*" propagation="REQUIRED"/>
+ 			<tx:method name="search*" propagation="REQUIRED"  read-only="true"/>
+ 			<tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>  
+    </tx:advice>  
+ 
+    
+  
+    <aop:config>  
+        <aop:pointcut id="persistOperation" expression="execution(* com.ocsoft.core.service.impl.*.*(..))||execution(* com.ocsoft.oa.service.system.impl.*.*(..)) " />  
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="persistOperation" />  
+         
+    </aop:config> 
+    
+   <!-- 
+    -->
+	<bean class="com.ocsoft.core.util.ApplicationContextHolder"/>
+</beans>

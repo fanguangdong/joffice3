@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" package="com.ocsoft.oa.vo.flow">
+	<class table="flow_def" name="FlowDefinition">
+		<id name="flowDefId" column="flow_def_id">
+			<generator class="native" />
+		</id>
+		<property name="defKey" column="def_key" not-null="true"/>
+		<property name="defDesc" column="def_desc" />
+		<property name="status" column="status" />
+		<property name="subject" column="subject" not-null="true"/>
+		<property name="versionNo" column="version_no" not-null="true"/>
+		<property name="defTypeId" column="def_type_id" not-null="true"/>
+		<property name="defXml" column="def_xml" length="5000"/>
+		<property name="deployId" column="deployment_id" not-null="true"/>
+		<property name="processDefId" column="process_def_id" not-null="true"/>
+		
+		<property name="editDate" column="edit_date" type="date" />
+		<property name="addDate" column="add_date" type="date" />
+		<property name="addUser" column="add_user" not-null="true" />
+		<property name="editUser" column="edit_user" not-null="true" />
+		
+		 
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" package="com.ocsoft.oa.vo.system">
+	<class table="app_role" name="AppRole">
+		<!-- <cache usage="read-write"/> -->
+		<id name="roleId" column="role_id">
+			<generator class="native" />
+		</id>
+		<property name="roleName" column="role_name" not-null="true" unique="true" />
+		
+		<!-- 
+		<property name="editDate" column="edit_date" type="date" />
+		<property name="addDate" column="add_date" type="date" />
+		<property name="addUser" column="add_user" not-null="true" />
+		<property name="editUser" column="edit_user" not-null="true" />
+		 -->
+		<!-- 
+		<set name="groups" inverse="false" lazy="true" cascade="delete-orphan">  
+			<key column="role_id"/> 
+			<one-to-many class="AppGroup"/>
+		</set>
+		 -->
+	</class>
+</hibernate-mapping>

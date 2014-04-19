@@ -1,0 +1,7 @@
+<Context docBase="%PROJECT_DIR%"
+		 path="/ivos"
+         privileged="true" 
+         antiResourceLocking="false" 
+         antiJARLocking="false" 
+         reloadable="false" >
+</Context>

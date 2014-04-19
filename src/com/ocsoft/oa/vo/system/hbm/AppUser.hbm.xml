@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" package="com.ocsoft.oa.vo.system">
+	<class table="app_user" name="AppUser">
+		<!-- <cache usage="read-write"/> -->
+		<id name="userId" column="user_id">
+			<generator class="native" />
+		</id>
+		<property name="userName" column="user_name" not-null="true" unique="true" />
+		<property name="userPwd" column="password" not-null="true" />
+		<property name="lastLoginTime" column="last_login_time" type="date"  />
+		<property name="active" column="active"  />
+		
+		<property name="fullName" column="full_name" />
+		<property name="joinDate" column="join_date" type="date" />
+		<property name="jobId" column="job_id"  />
+		<property name="deptId" column="dept_id"  />
+		<property name="sex" column="sex"  />
+		<property name="email" column="email"  />
+		<property name="phone" column="phone"  />
+		<property name="address" column="address"  />
+		<property name="province" column="province"  />
+		<property name="city" column="city"  />
+		<property name="zip" column="zip"  />
+		
+		<!-- 
+		<property name="editDate" column="edit_date" type="date" />
+		<property name="addDate" column="add_date" type="date" />
+		<property name="addUser" column="add_user" not-null="true" />
+		<property name="editUser" column="edit_user" not-null="true" />
+		 -->
+		<!-- 
+		<set name="groups" inverse="false" lazy="true" cascade="all-delete-orphan"> 
+			<key column="user_id"/> 
+			<one-to-many class="AppGroup"/> 
+		</set>
+		 -->
+	</class>
+</hibernate-mapping>

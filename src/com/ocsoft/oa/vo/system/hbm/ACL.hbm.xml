@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" package="com.ocsoft.oa.vo.system">
+	<class table="acl" name="ACL">
+		<composite-id>
+			<key-many-to-one name="appRole" class="AppRole">
+				<column name="role_id"></column>
+			</key-many-to-one>
+			<key-property name="resSn">
+				<column name="res_sn"></column>
+			</key-property>
+			<key-property name="actionType">
+				<column name="action_type"></column>
+			</key-property>
+		</composite-id>
+		<!-- 
+		<id name="aclId" column="acl_id">
+			<generator class="native" />
+		</id>
+		<many-to-one name="appRole" class="AppRole">
+			<column name="role_id"></column>
+		</many-to-one>
+		<property name="resSn" column="res_sn" not-null="true" />
+		<property name="actionType" column="action_type" not-null="false" />
+		 -->
+		<property name="status"/>
+		 
+	</class>
+</hibernate-mapping>

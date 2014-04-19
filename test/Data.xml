@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moudles>
+<module moduleName="用户组织管理" defaultUrl="" resSn="usrOrgMgt" showInMenu="1">
+	<module moduleName="用户管理" defaultUrl="user/showList.oa" parent="usrOrgMgt" resSn="usrMgt" showInMenu="1">
+		<module moduleName="添加用户" defaultUrl="user/add.oa" parent="usrMgt" resSn="addUsr" showInMenu="0"/>
+		<module moduleName="编辑管理" defaultUrl="user/edit.oa" parent="usrMgt" resSn="editUsr" showInMenu="0"/>
+		<module moduleName="删除管理" defaultUrl="user/del.oa" parent="usrMgt" resSn="delUsr" showInMenu="0"/>
+		<module moduleName="设置角色" defaultUrl="user/showAssignRoles.oa" parent="usrMgt" resSn="addRole2User" showInMenu="0"/>
+	</module>
+	<module moduleName="角色管理" defaultUrl="role/showList.oa" parent="usrOrgMgt" resSn="roleMgt" showInMenu="1">
+		<module moduleName="添加角色" defaultUrl="role/add.oa" parent="roleMgt" resSn="addRole" showInMenu="0"/>
+		<module moduleName="编辑角色" defaultUrl="role/edit.oa" parent="roleMgt" resSn="editRole" showInMenu="0"/>
+		<module moduleName="删除角色" defaultUrl="role/del.oa" parent="roleMgt" resSn="delRole" showInMenu="0"/>
+		<module moduleName="添加用户" defaultUrl="role/showAssignedUsers.oa" parent="roleMgt" resSn="addUser2Role" showInMenu="0"/>
+		<module moduleName="角色授权" defaultUrl="role/showAuth.oa" parent="roleMgt" resSn="roleAuth" showInMenu="0"/>
+	</module>
+	<module moduleName="岗位管理" defaultUrl="position/show.oa" parent="usrOrgMgt" resSn="posMgt" showInMenu="1">
+		<module moduleName="添加岗位" defaultUrl="position/add.oa" parent="posMgt" resSn="addPos" showInMenu="0"/>
+		<module moduleName="编辑岗位" defaultUrl="position/edit.oa" parent="posMgt" resSn="editPos" showInMenu="0"/>
+		<module moduleName="删除岗位" defaultUrl="position/del.oa" parent="posMgt" resSn="delPos" showInMenu="0"/>
+		<module moduleName="设置人员" defaultUrl="position/add.oa" parent="posMgt" resSn="addUsr2Pos" showInMenu="0"/>
+	</module>
+</module>
+
+<module moduleName="系统管理" defaultUrl="" resSn="sysMgt" showInMenu="1">
+	<module moduleName="系统配置" defaultUrl="" parent="sysMgt" resSn="sysConfig" showInMenu="1">
+		<module moduleName="资源管理" defaultUrl="module/show.oa" parent="sysConfig" resSn="showMod" showInMenu="0">
+			<module moduleName="添加资源" defaultUrl="module/add.oa" parent="showMod" resSn="addMod" showInMenu="0"/>
+			<module moduleName="编辑资源" defaultUrl="module/edit.oa" parent="showMod" resSn="editMod" showInMenu="0"/>
+			<module moduleName="删除资源" defaultUrl="module/del.oa" parent="showMod" resSn="delMod" showInMenu="0"/>
+		</module>
+	</module>
+</module>
+
+<module moduleName="流程管理" defaultUrl="" resSn="flowAdmin" showInMenu="1">
+	<module moduleName="表单管理" defaultUrl="" parent="flowAdmin" resSn="formMgt" showInMenu="1">
+	</module>
+	<module moduleName="流程管理" defaultUrl="" parent="flowAdmin" resSn="flowMgt" showInMenu="1">
+		<module moduleName="流程定义" defaultUrl="flowDef/show.oa" parent="flowMgt" resSn="showFlowDef" showInMenu="1">
+			<module moduleName="流程发布" defaultUrl="flowDef/showUpload.oa" parent="showFlowDef" resSn="deployFlowDef" showInMenu="0"/>
+			<module moduleName="删除发布" defaultUrl="flowDef/del.oa" parent="showFlowDef" resSn="delFlowDef" showInMenu="0"/>
+			<module moduleName="流程设置" defaultUrl="flowDef/config.oa" parent="showFlowDef" resSn="configFlowDef" showInMenu="0"/>
+		</module>
+		<module moduleName="流程实例" defaultUrl="flowInstance/show.oa" parent="flowMgt" resSn="showFlowIns" showInMenu="0">
+		</module>
+		<module moduleName="流程任务" defaultUrl="flowTask/show.oa" parent="flowMgt" resSn="showFlowTask" showInMenu="0">
+		</module>
+		<module moduleName="流程历史" defaultUrl="flowHistory/show.oa" parent="flowMgt" resSn="showFlowHistory" showInMenu="0">
+		</module>
+	</module>
+</module>
+</moudles>

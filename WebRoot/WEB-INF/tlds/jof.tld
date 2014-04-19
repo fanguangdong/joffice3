@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<!--
+<!DOCTYPE taglib [
+
+	<!ELEMENT taglib (tlibversion, jspversion?, shortname, uri?, info?, tag+) >
+	<!ATTLIST taglib id ID #IMPLIED>
+	<!ELEMENT tlibversion (#PCDATA) >
+	<!ELEMENT jspversion  (#PCDATA) >
+	<!ELEMENT shortname      (#PCDATA) >
+	<!ELEMENT uri	 (#PCDATA) >
+	<!ELEMENT info	(#PCDATA) >
+	<!ELEMENT tag (name, tagclass, teiclass?, bodycontent?, info?, attribute*) >
+	<!ELEMENT tagclass (#PCDATA) >
+	<!ELEMENT teiclass (#PCDATA) >
+	<!ELEMENT bodycontent (#PCDATA) >
+	<!ELEMENT attribute (name, required? , rtexprvalue?) >
+	<!ELEMENT name	(#PCDATA) >
+	<!ELEMENT required    (#PCDATA) >
+	<!ELEMENT rtexprvalue (#PCDATA) >
+	<!ATTLIST tlibversion id ID #IMPLIED>
+	<!ATTLIST jspversion id ID #IMPLIED>
+	<!ATTLIST shortname id ID #IMPLIED>
+	<!ATTLIST uri id ID #IMPLIED>
+	<!ATTLIST info id ID #IMPLIED>
+	<!ATTLIST tag id ID #IMPLIED>
+	<!ATTLIST tagclass id ID #IMPLIED>
+	<!ATTLIST teiclass id ID #IMPLIED>
+	<!ATTLIST bodycontent id ID #IMPLIED>
+	<!ATTLIST attribute id ID #IMPLIED>
+	<!ATTLIST name id ID #IMPLIED>
+	<!ATTLIST required id ID #IMPLIED>
+	<!ATTLIST rtexprvalue id ID #IMPLIED>
+]>
+-->
+
+<taglib>
+	<tlibversion>2.5</tlibversion>
+	<jspversion>1.2</jspversion>
+	<shortname>IVos Tags</shortname>
+	<info> Tags from VOS </info>
+
+	
+	<tag>
+		<name>Menu</name>
+		<tag-class>com.ocsoft.oa.web.ui.ModuleMenuTag</tag-class>
+		<body-content>empty</body-content>
+		<description>
+			Generates a menu
+		</description>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>id</description>
+		</attribute>
+		<attribute>
+			<name>prefix</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>prefix</description>
+		</attribute>
+		<attribute>
+			<name>target</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description>target</description>
+		</attribute>
+		<attribute>
+			<name>items</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>items</description>
+		</attribute>
+		<attribute>
+			<name>cssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>class</description>
+		</attribute>
+		<attribute>
+			<name>cssStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>style</description>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>CustomForm</name>
+		<tag-class>com.ocsoft.oa.web.ui.CustomFormTag</tag-class>
+		<body-content>empty</body-content>
+		<description>
+			Generates a custom form
+		</description>
+		<attribute>
+			<name>formId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>formId</description>
+		</attribute>
+		
+	</tag>
+
+	<function>
+		<name>hasPermission</name>
+		<function-class>com.ocsoft.oa.web.ui.PermissionTag</function-class>
+		<function-signature>boolean hasPermission(java.lang.String, java.lang.String, int)</function-signature>
+		
+	</function>
+</taglib>

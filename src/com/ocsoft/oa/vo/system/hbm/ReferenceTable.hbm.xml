@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" package="com.ocsoft.oa.vo.system">
+	<class table="ref_table" name="ReferenceTable">
+		<id name="refId" column="ref_id">
+			<generator class="native" />
+		</id>
+		<property name="refKey" column="ref_key" not-null="true" />
+		<property name="refTable" column="ref_table" not-null="false" />
+		<property name="textField" column="text_field" not-null="false" />
+		<property name="valueField" column="value_field" not-null="false" />
+		 
+	</class>
+</hibernate-mapping>

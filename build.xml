@@ -1,0 +1,24 @@
+<project name="joffice" basedir="." default="init.context">
+	<property name="joffice.dir" location="." />
+	<echo message="${joffice.dir}" />
+	
+	<property name="joffice.web.dir" location="${joffice.dir}/web" />
+	<echo message="${joffice.web.dir}" />
+	
+	<property name="conf.dir" location="resources/conf" />
+	<echo message="${conf.dir}" />
+	<property file="resources/conf/build.properties" />
+
+	<target name="init.context">
+		<copy file="${conf.dir}/tomcat-context.xml" tofile="${tomcat.home}/conf/Catalina/localhost/joffice.xml" overwrite="true">
+			<filterset begintoken="%" endtoken="%">
+				<filter token="PROJECT_DIR" value="${joffice.web.dir}" />
+			</filterset>
+		</copy>
+		<delete includeemptydirs="true">
+			<fileset dir="${tomcat.home}/work" includes="**/*" />
+		</delete>
+		<echo level="info">Tomcat ${tomcat.home}/work directory cleared</echo>
+	</target>
+
+</project>

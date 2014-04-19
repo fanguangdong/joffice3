@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>Ocellus Office</display-name>
+
+	<description>Ocellus Office Application</description>
+
+	<!--
+		- Location of the Log4J config file, for initialization and refresh checks.
+		- Applied by Log4jConfigListener.
+	-->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/log4j.properties</param-value>
+	</context-param>
+
+	<!--
+		- Location of the XML file that defines the root application context.
+		- Applied by ContextLoaderServlet.
+		-
+		- Can include "/WEB-INF/dataAccessContext-local.xml" for a single-database
+		- context, or "/WEB-INF/dataAccessContext-jta.xml" for a two-database context.
+	-->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+		classpath*:conf/applicationContext.xml
+		</param-value>
+	</context-param>
+
+	<!--
+		- Configures Log4J for this web app.
+		- As this context specifies a context-param "log4jConfigLocation", its file path
+		- is used to load the Log4J configuration, including periodic refresh checks.
+		-
+		- Would fall back to default Log4J initialization (non-refreshing) if no special
+		- context-params are given.
+		-
+		- Exports a "web app root key", i.e. a system property that specifies the root
+		- directory of this web app, for usage in log file paths.
+		- This web app specifies "petclinic.root" (see log4j.properties file).
+	-->
+	<!-- Leave the listener commented-out if using JBoss -->
+	<!--
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	-->
+
+	<!--
+		- Loads the root application context of this web app at startup,
+		- by default from "/WEB-INF/applicationContext.xml".
+		- Note that you need to fall back to Spring's ContextLoaderServlet for
+		- J2EE servers that do not follow the Servlet 2.4 initialization order.
+		-
+		- Use WebApplicationContextUtils.getWebApplicationContext(servletContext)
+		- to access it anywhere in the web application, outside of the framework.
+		-
+		- The root context is the parent of all servlet-specific contexts.
+		- This means that its beans are automatically available in these child contexts,
+		- both for getBean(name) calls and (external) bean references.
+	-->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- Spring Security 
+	 <filter>  
+        <filter-name>springSecurityFilterChain</filter-name>  
+        <filter-class>  
+            org.springframework.web.filter.DelegatingFilterProxy  
+        </filter-class>  
+   </filter>  
+    <filter-mapping>  
+        <filter-name>springSecurityFilterChain</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>
+	-->
+
+	<!--
+		- Spring web MVC servlet that dispatches requests to registered handlers.
+		- Has its own application context, by default defined in "{servlet-name}-servlet.xml",
+		- i.e. "petstore-servlet.xml" in this case.
+		-
+		- A web app can contain any number of such servlets.
+		- Note that this web app has a shared root application context, serving as parent
+		- of all DispatcherServlet contexts.
+	-->
+	<servlet>
+		<servlet-name>SpringOA</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+
+	
+	
+	<servlet-mapping>
+		<servlet-name>SpringOA</servlet-name>
+		<url-pattern>*.oa</url-pattern>
+	</servlet-mapping>
+	
+	<!--  
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.ocellus.web.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	-->
+	<filter>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<filter-class>
+			org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>           
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>Spring character encoding filter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Spring character encoding filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Remove web cache 
+	<filter>  
+	  <filter-name>WebCacheFilter</filter-name>  
+	  <filter-class>com.ocellus.web.filter.WebCacheFilter</filter-class>  
+	</filter>
+	<filter-mapping>
+		<filter-name>WebCacheFilter</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+	-->
+	<welcome-file-list>
+		<welcome-file>index.oa</welcome-file>
+	</welcome-file-list>
+</web-app>

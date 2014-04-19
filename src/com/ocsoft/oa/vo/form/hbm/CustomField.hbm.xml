@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" package="com.ocsoft.oa.vo.form">
+	<class table="custom_field" name="CustomField">
+		<id name="fieldId" column="field_id">
+			<generator class="native" />
+		</id>
+		<property name="fieldName" column="field_name" not-null="true"/>
+		<property name="fieldLabel" column="field_label" not-null="true"/>
+		<property name="fieldType" column="field_type" not-null="true"/>
+		<property name="fieldSize" column="field_size" />
+		<property name="maxSize" column="max_size" />
+		<property name="isRequired" column="is_required" />
+		<property name="defaultValue" column="default_value" />
+		<property name="isPK" column="is_pk"/>
+		<!-- 
+		<many-to-one name="customTable" class="CustomTable" column="table_id" cascade="save-update"></many-to-one>
+		 -->
+		<many-to-one name="customForm" class="CustomForm" column="form_id" foreign-key="FK_form_field" cascade="save-update"></many-to-one>
+		
+		 
+	</class>
+</hibernate-mapping>

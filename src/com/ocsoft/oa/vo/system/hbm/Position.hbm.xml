@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" package="com.ocsoft.oa.vo.system">
+	<class table="position" name="Position">
+		<id name="posId" column="position_id">
+			<generator class="native" />
+		</id>
+		
+		<property name="posName" column="position_name" not-null="true"/>
+		<property name="posDesc" column="position_desc" not-null="false" />
+		<property name="parentId" column="parent_id" />
+		<property name="nodePath" column="node_path" not-null="false" />
+		<property name="depth" />
+		<property name="sn" />
+		<!-- 
+		<property name="isPrimary" column="is_primary"/>
+		 -->
+		 <property name="isLeaf" column="is_leaf"/>
+		 
+		<!-- 
+		<property name="editDate" column="edit_date" type="date" />
+		<property name="addDate" column="add_date" type="date" />
+		<property name="addUser" column="add_user" not-null="true" />
+		<property name="editUser" column="edit_user" not-null="true" />
+		 -->
+		 
+	</class>
+</hibernate-mapping>

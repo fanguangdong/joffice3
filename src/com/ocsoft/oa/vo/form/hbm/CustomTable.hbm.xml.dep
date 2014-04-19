@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" package="com.ocsoft.oa.vo.form">
+	<class table="custom_table" name="CustomTable">
+		<id name="tableId" column="table_id">
+			<generator class="native" />
+		</id>
+		<property name="tableName" column="table_name" not-null="true"/>
+		<many-to-one name="customForm" class="CustomForm" column="form_id"></many-to-one>
+		<set name="fields" inverse="true" cascade="all">
+			<key column="table_id"/>
+			<one-to-many class="CustomField"/>
+		</set>
+		
+		
+		 
+	</class>
+</hibernate-mapping>
